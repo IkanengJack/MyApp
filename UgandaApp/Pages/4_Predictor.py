@@ -3,10 +3,18 @@ import streamlit as st
 import pandas as pd
 from sklearn.linear_model import LinearRegression, Lasso
 
-import streamlit as st
-import pandas as pd
 from sklearn.linear_model import Lasso
 
+col1, col2 = st.columns([2, 1])  # Create two equal-width columns
+
+# Fill the first column  
+col1.header("                    ")
+col1.header("                    ")
+col1.header("                    ")
+col1.markdown("<h1 style='color: #fcdc04;'>Predictor</h1>", unsafe_allow_html=True)
+
+# Place the image in the second column
+col2.image("logo2.png", width=300)
 # Load the dataset
 data = pd.read_csv("df_train.csv")
 
