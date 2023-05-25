@@ -1,4 +1,4 @@
-# {{project_name}}
+# Fibre competitive intensity model - Uganda
 
 ## Project description
 
@@ -7,9 +7,11 @@
 
 ## Team Members
 
-- Team Member Name 1
-- Team Member Name 2
-- ...
+ > Kamogelo Mogaba <br>
+ > David Mugambi <br>
+ > Ikaneng Jack <br>
+ > Omolayo Ipinsanmi <br>
+ > Atunima Emmanuel <br>
 
 ## Environment
 
