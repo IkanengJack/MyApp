@@ -3,6 +3,7 @@ import streamlit as st
 import folium
 import pandas as pd
 import streamlit.components.v1 as components
+import toml
 
 from sklearn.linear_model import LinearRegression, Lasso
 from sklearn.linear_model import Lasso
@@ -11,23 +12,24 @@ from PIL import Image
 st.set_page_config(page_title = "Uganda App")
 #page_icon (":smiley:" )
 
+background_html = """
+<style>
+[theme]
+base="light"
+primaryColor="#9ca69c"
+secondaryBackgroundColor="#fcdc04"
+textColor="#d90000"
+</style>
+"""
+
 # The main function where we will build the actual app
 def main():
-    options = ["Home","About us", "Fibre_Optics_Advantages","Predictor", "Uganda_Map","Contact Us"]
-    selection = st.sidebar.selectbox("Navigation Pane", options)
+    """Uganda App"""
+    options = ["Home","About us", "Fibre Optics Advantages","Predictor", "Uganda_Map","Contact Us"]
+    selection = st.sidebar.selectbox("Navigation Panel", options , format_func=lambda x: x)
     if selection == "Home":
         #st.set_page_config(page_title = "Uganda App")
         
-        background_html = """
-<style>
-body {
-    background-image: url('Ab.jpg');
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
-}
-</style>
-"""
 
         # Use st.markdown() to insert the HTML code
         st.markdown(background_html, unsafe_allow_html=True)
@@ -106,7 +108,7 @@ body {
             st.info('Data Scientist')
 
 
-    if selection == "Fibre_Optics_Adantages":
+    if selection == "Fibre Optics Advantages":
         col1, col2 = st.columns([2, 1])  # Create two equal-width columns
 
         # Fill the first column  
@@ -238,16 +240,28 @@ body {
 
             # Place the image in the second column
             col2.image("logo2.png", width=300)
-            #st.title("Uganda Map")
-            HtmlFile = open("my_map.html", 'r', encoding='utf-8')
-            source_code = HtmlFile.read() 
+            #st.image("Ab.jpg", width=450)
+            st.header(" Get in touch with us 📩 ")
+            contact_form = """
+            <form action="https://formsubmit.co/ereshiagabier@gmail.com" method="POST">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="text" name="name" placeholder="Your name"required>
+                <input type="email" name="email" placeholder="Your email"required>
+                <textarea name="message" placeholder="Your message here"></textarea>
+                <button type="submit">Send</button>
+            </form>
+            """
+            st.markdown(contact_form, unsafe_allow_html=True)
 
-            # Set the desired height and width for the map
-            height = 500  # adjust the value as needed
-            width = 800  # adjust the value as needed
+            def local_css(file_name):
+                with open(file_name) as f:
+                    st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
-            components.html(source_code,  height=height, width=width)
-                
+            local_css("style/style.css")
+            st.image("Thank you.jpg", width=700)
+
+        selection = "Contact Us"
+        options.get(selection, lambda: None)()
 
 # Required to let Streamlit instantiate our web app.  
 if __name__ == '__main__':
