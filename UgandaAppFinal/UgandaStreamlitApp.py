@@ -152,7 +152,10 @@ def main():
         - Suitable for underwater, underground,
             and industrial settings
         ''')
-			
+        st.write("")
+        st.image("Image 2.jpeg", width= 800)
+        st.write("")
+        st.image("Image 1.jpeg", width= 800)
 				
 	# Building a Predictor Page
     if selection == "Predictor":
