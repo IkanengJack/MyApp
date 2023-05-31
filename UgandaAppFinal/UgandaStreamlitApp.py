@@ -214,7 +214,7 @@ def main():
         # Place the image in the second column
         col2.image("logo2.png", width=300)
         #st.title("Uganda Map")
-        HtmlFile = open("my_map.html", 'r', encoding='utf-8')
+        HtmlFile = open("my_map1.html", 'r', encoding='utf-8')
         source_code = HtmlFile.read() 
 
         # Set the desired height and width for the map
