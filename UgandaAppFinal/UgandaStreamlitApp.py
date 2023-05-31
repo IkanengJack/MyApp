@@ -15,10 +15,9 @@ st.set_page_config(page_title = "Uganda App")
 background_html = """
 <style>
 [theme]
-base="light"
-primaryColor="#9ca69c"
-secondaryBackgroundColor="#fcdc04"
-textColor="#d90000"
+base="dark"
+primaryColor="#fb0a0a"
+textColor="#fcdc04"
 </style>
 """
 
