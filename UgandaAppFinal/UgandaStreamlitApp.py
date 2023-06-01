@@ -5,6 +5,7 @@ import pandas as pd
 import streamlit.components.v1 as components
 import toml
 import pickle 
+import warnings
 
 from sklearn.linear_model import LinearRegression, Lasso
 from sklearn.linear_model import Lasso
@@ -172,7 +173,9 @@ def main():
 				
 	# Building a Predictor Page
     if selection == "Predictor":
-        
+        import warnings
+        warnings.filterwarnings("ignore", message="Trying to unpickle estimator")
+
 
         col1, col2 = st.columns([2, 1])  # Create two equal-width columns
 
