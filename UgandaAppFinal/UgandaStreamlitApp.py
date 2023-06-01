@@ -4,9 +4,11 @@ import folium
 import pandas as pd
 import streamlit.components.v1 as components
 import toml
+import pickle 
 
 from sklearn.linear_model import LinearRegression, Lasso
 from sklearn.linear_model import Lasso
+from streamlit_option_menu import option_menu
 from PIL import Image
 #st.markdown("<h1 style='color: #67B69B;'>Solution Overview</h1>", unsafe_allow_html=True)
 st.set_page_config(page_title = "Uganda App")
@@ -24,8 +26,15 @@ textColor="#fcdc04"
 # The main function where we will build the actual app
 def main():
     """Uganda App"""
-    options = ["Home","About us", "Fibre Optics Advantages","Predictor", "Uganda_Map","Contact Us"]
-    selection = st.sidebar.selectbox("Navigation Panel", options , format_func=lambda x: x)
+    with st.sidebar:
+        selection = option_menu(
+        menu_title = "Main Menu",
+        options = ["Home","About us", "Fibre Optics Advantages","Predictor", "Uganda_Map","Contact Us"],
+        icons = ["house", "book", "magic","bar-chart-line","globe-europe-africa", "envelope" ],
+        default_index=0
+    )
+    
+    
     if selection == "Home":
         #st.set_page_config(page_title = "Uganda App")
         
@@ -33,7 +42,7 @@ def main():
         # Use st.markdown() to insert the HTML code
         st.markdown(background_html, unsafe_allow_html=True)
 
-
+        st.title("Uganda App")
         st.image("Team.jpg", width= 800)
     		#select = st.sidebar.selectbox("Who we are 🌐",["The Company","Meet the Team"])
     if selection == "About us":
@@ -77,7 +86,7 @@ def main():
         # 2
         col1, col2 = st.columns(2)
         with col1:
-            st.image("Atunima.jpeg", width=200)
+            st.image("Atunima1.jpeg", width=200)
         with col2:
             st.subheader("Atunima")
             st.info('Lead Data Engineer')
@@ -93,7 +102,7 @@ def main():
         # 4
         col1, col2 = st.columns(2)
         with col1:
-            st.image("Layo.jpeg", width=200)
+            st.image("Layo1.jpeg", width=200)
         with col2:
             st.subheader("Omolayo")
             st.info('Senior Data Scientist')
@@ -125,39 +134,46 @@ def main():
         st.markdown("<h3 style='color: #9ca69c;'>Fiber optics offers several advantages over traditional methods of data transmission, such as copper wiring. Here are some key advantages of fiber optics:</h3>", unsafe_allow_html=True)
         st.info('''# Advantages of Fiber Optics:
 
-        1. High Bandwidth             |   5. Immunity to Electromagnetic Interference
-        - Enables transmission of         - Unaffected by electromagnetic interference
-            large amounts of data             and radio frequency interference
-        - Ideal for high-speed              (EMI/RFI)
-            internet, video streaming,      - Can be installed near electrical equipment
-            cloud computing, etc.
+        1. High Bandwidth                     5. Immunity to Electromagnetic 
+         - Enables transmission of           Interference
+           large amounts of data           - Unaffected by electromagnetic 
+         - Ideal for high-speed              interference and radio
+           internet, video streaming,        frequency interference
+           cloud computing, etc.             (EMI/RFI)
+                                           - Can be installed near electrical 
+                                             equipment
 
-        2. Fast Data Transmission     |    6. Secure Data Transmission
-        - Light travels at high            - Difficult to tap into transmission without
-            speeds through fiber optic        detection
-            cables                            - Highly secure for sensitive applications
-        - Achieves terabit-per-second       - Used for government communications,
-            speeds                            banking transactions, medical data transfer
-
+        2. Fast Data Transmission         6. Secure Data Transmission
+         - Light travels at high           - Difficult to tap into transmission 
+           speeds through fiber optic        without detection
+           cables                          - Highly secure for sensitive 
+         - Achieves terabit-per-second       applications
+           speeds                          - Used for government communications,
+                                             banking transactions, medical data 
+                                             transfer
+                                            
         3. Long-Distance Transmission     7. Lightweight and Compact
-        - Minimal signal degradation       - Lightweight and smaller diameter compared
-            over long distances               to copper wires
-        - Connects geographically          - Easier installation and management
-            distant locations                 - Higher density and efficient use of resources
-
-        4. Resistance to Environmental Factors
-        - Less susceptible to temperature fluctuations,
-            moisture, and corrosion
-        - Suitable for underwater, underground,
-            and industrial settings
+         - Minimal signal degradation       - Lightweight and smaller diameter 
+           over long distances                compared to copper wires
+         - Connects geographically          - Easier installation and management
+           distant locations                - Higher density and efficient use of 
+                                              resources
+        4. Resistance to Environmental 
+           Factors
+         - Less susceptible to temperature ,
+           fluctuations moisture, and corrosion
+         - Suitable for underwater, underground,
+           and industrial settings
         ''')
         st.write("")
         st.image("Image 2.jpeg", width= 800)
         st.write("")
-        st.image("Image 1.jpeg", width= 800)
+        #st.image("Image 1.jpeg", width= 800)
 				
 	# Building a Predictor Page
     if selection == "Predictor":
+        
+
         col1, col2 = st.columns([2, 1])  # Create two equal-width columns
 
         # Fill the first column  
@@ -171,26 +187,31 @@ def main():
         # Load the dataset
         data = pd.read_csv("df_train.csv")
 
-        selected_cols = ['Total_households', 'rwi', 'Population_density', 'literacy_rate_%', 'Eastern']
+        selected_cols = ['Zonning', 'Employment_rate', 'Total_households', 'poverty_index', 'GDP_per_capita']
 
         # Prepare the features and target variable
         X = data[selected_cols]
-        y = data['uptake_rate']
+        y = data['tests_per_population']
 
         # Train the model
-        model = Lasso(alpha=0.001)
+        model = pickle.load(open('RF_model_imp_feats.sav', 'rb'))
         model.fit(X, y)
 
         # Create the Streamlit app
         def main():
             st.title("Predictor App")
-
+            zoning_options = {1:"Rural", 2:"Mixed", 3:"Town", 4:"Urban"}
+            
+            # Reverse the zoning_options dictionary
+            zoning_mapping = {v: k for k, v in zoning_options.items()}
+            
             # Collect input from the user
-            feature1 = st.number_input("Total_households:", value=0.0)
-            feature2 = st.number_input("rwi:", value=0.0)
-            feature3 = st.number_input("Population_density:", value=0.0)
-            feature4 = st.number_input("Literacy_rate_%", value=0.0)
-            feature5 = st.number_input("'Eastern'", value=0.0)
+            feature1_label = st.selectbox("Zonning", list(zoning_options.values()), index=0)
+            feature1 = zoning_mapping[feature1_label]
+            feature2 = st.number_input("Employement rate:", value=0.0)
+            feature3 = st.number_input("Total_households:", value=0.0)
+            feature4 = st.number_input("poverty_index", value=0.0)
+            feature5 = st.number_input("GDP_per_capita($)", value=0.0)
 
             # Make a prediction using the trained model
             prediction = model.predict([[feature1, feature2, feature3, feature4, feature5]])
