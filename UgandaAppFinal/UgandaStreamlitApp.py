@@ -19,7 +19,16 @@ st.set_page_config(page_title = "Uganda App")
 
 st.markdown('<link rel="stylesheet" type="text/css" href="static/style.css">', unsafe_allow_html=True)
 
-components.html( """
+components.html("""
+<style>
+[theme]
+base="dark"
+primaryColor="#fb0a0a"
+textColor="#fcdc04"
+</style>
+""")
+
+background_html = """
 <style>
 [theme]
 base="dark"
@@ -27,7 +36,6 @@ primaryColor="#fb0a0a"
 textColor="#fcdc04"
 </style>
 """
-)
 
 # The main function where we will build the actual app
 def main():
