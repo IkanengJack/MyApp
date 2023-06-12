@@ -3,3 +3,6 @@ base="light"
 primaryColor="#9ca69c"
 secondaryBackgroundColor="#fcdc04"
 textColor="#d90000"
+
+[server]
+staticFolderPath = "UgandaAppFinal"
