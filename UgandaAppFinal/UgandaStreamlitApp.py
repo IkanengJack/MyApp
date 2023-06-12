@@ -197,8 +197,11 @@ def main():
         y = data['tests_per_population']
 
         # Train the model
-        model = pickle.load(open('RF_model_imp_feats.sav', 'rb'))
-        model.fit(X, y)
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore")
+            model = pickle.load(open('RF_model_imp_feats.sav', 'rb'))
+            model.fit(X, y)
+
 
         # Create the Streamlit app
         def main():
