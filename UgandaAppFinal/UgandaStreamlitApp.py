@@ -17,6 +17,8 @@ from PIL import Image
 st.set_page_config(page_title = "Uganda App")
 #page_icon (":smiley:" )
 
+st.markdown('<link rel="stylesheet" type="text/css" href="static/style.css">', unsafe_allow_html=True)
+
 background_html = """
 <style>
 [theme]
