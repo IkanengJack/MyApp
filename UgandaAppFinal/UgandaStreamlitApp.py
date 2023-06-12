@@ -289,7 +289,7 @@ def main():
                     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
             local_css("style/style.css")
-            st.image("UgandaAppFinal","Thank you.jpg", width=700)
+            st.image("UgandaAppFinal/Thank you.jpg", width=700)
 
         selection = "Contact Us"
         options.get(selection, lambda: None)()
