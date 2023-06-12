@@ -201,7 +201,7 @@ def main():
         y = data['tests_per_population']
 
         # Train the model
-        model = pickle.load(open("UgandaAppFinal",'RF_model_imp_feats.sav', 'rb'))
+        model = pickle.load(open("UgandaAppFinal/RF_model_imp_feats.sav", 'rb'))
         model.fit(X, y)
 
         # Create the Streamlit app
@@ -244,7 +244,7 @@ def main():
         # Place the image in the second column
         col2.image(os.path.join("UgandaAppFinal","logo2.png"), width=300)
         #st.title("Uganda Map")
-        HtmlFile = open("UgandaAppFinal","my_map1.html", 'r', encoding='utf-8')
+        HtmlFile = open("UgandaAppFinal/my_map1.html", 'r', encoding='utf-8')
         source_code = HtmlFile.read() 
 
         # Set the desired height and width for the map
@@ -284,7 +284,8 @@ def main():
             st.markdown(contact_form, unsafe_allow_html=True)
 
             def local_css(file_name):
-                with open(file_name) as f:
+                with open("UgandaAppFinal/style/style.css") as f:
+
                     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
             local_css("style/style.css")
