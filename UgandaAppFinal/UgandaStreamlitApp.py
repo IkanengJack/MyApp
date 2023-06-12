@@ -189,7 +189,7 @@ def main():
         col1.markdown("<h1 style='color: #fcdc04;'>Predictor</h1>", unsafe_allow_html=True)
 
         # Place the image in the second column
-        col2.image(os.path.join(UgandaAppFinal/"logo2.png"), width=300)
+        col2.image(os.path.join("UgandaAppFinal","logo2.png"), width=300)
         # Load the dataset
         data = pd.read_csv(os.path.join("UgandaAppFinal","df_train.csv"))
 
