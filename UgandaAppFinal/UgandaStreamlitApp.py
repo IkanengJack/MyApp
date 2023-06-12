@@ -18,15 +18,40 @@ st.set_page_config(page_title = "Uganda App")
 #page_icon (":smiley:" )
 
 st.markdown('<link rel="stylesheet" type="text/css" href="static/style.css">', unsafe_allow_html=True)
+st.markdown(
+    """
+    <style>
+    /* Style inputs with type="text", select elements and textareas */
+    input[type=text], input[type=email], textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        margin-top: 6px;
+        margin-bottom: 16px;
+        resize: vertical;
+    }
 
-components.html("""
-<style>
-[theme]
-base="dark"
-primaryColor="#fb0a0a"
-textColor="#fcdc04"
-</style>
-""")
+    /* Style the submit button with a specific background color etc */
+    button[type=submit] {
+        background-color: #04AA6D;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    /* When moving the mouse over the submit button, add a darker green color */
+    button[type=submit]:hover {
+        background-color: #45a049;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 
 background_html = """
 <style>
