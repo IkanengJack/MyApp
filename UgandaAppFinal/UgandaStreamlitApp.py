@@ -284,11 +284,11 @@ def main():
             st.markdown(contact_form, unsafe_allow_html=True)
 
             def local_css(file_name):
-                with open("UgandaAppFinal/style/style.css") as f:
+                with open("UgandaAppFinal/static/style.css") as f:
 
                     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
-            local_css("style/style.css")
+            local_css("static/style.css")
             st.image("UgandaAppFinal/Thank you.jpg", width=700)
 
         selection = "Contact Us"
