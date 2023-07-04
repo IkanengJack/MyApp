@@ -6,7 +6,9 @@ import streamlit.components.v1 as components
 import toml
 import pickle 
 import warnings
+import os
 
+from pathlib import Path
 from sklearn.linear_model import LinearRegression, Lasso
 from sklearn.linear_model import Lasso
 from streamlit_option_menu import option_menu
@@ -14,6 +16,8 @@ from PIL import Image
 #st.markdown("<h1 style='color: #67B69B;'>Solution Overview</h1>", unsafe_allow_html=True)
 st.set_page_config(page_title = "Uganda App")
 #page_icon (":smiley:" )
+
+st.markdown('<link rel="stylesheet" type="text/css" href="static/style.css">', unsafe_allow_html=True)
 
 background_html = """
 <style>
@@ -44,7 +48,8 @@ def main():
         st.markdown(background_html, unsafe_allow_html=True)
 
         st.title("Uganda App")
-        st.image("Team.jpg", width= 800)
+        st.image(os.path.join("UgandaAppFinal","Team.jpg"), width=800)
+
     		#select = st.sidebar.selectbox("Who we are 🌐",["The Company","Meet the Team"])
     if selection == "About us":
         col1, col2 = st.columns([2, 1])  # Create two equal-width columns
@@ -56,7 +61,7 @@ def main():
         col1.markdown("<h1 style='color: #fcdc04;'>About Us</h1>", unsafe_allow_html=True)
 
         # Place the image in the second column
-        col2.image("logo2.png", width=300)
+        col2.image(os.path.join("UgandaAppFinal","logo2.png"), width=300)
 
         #st.title('About us')
 
@@ -79,7 +84,7 @@ def main():
         # 1
         col1, col2 = st.columns(2)
         with col1:
-            st.image("Kamo.jpeg", width=200,)
+            st.image(os.path.join("UgandaAppFinal","Kamo.jpeg"), width=200,)
         with col2:
             st.subheader("Kamogelo")
             st.info('Team Lead Manager')
@@ -87,7 +92,7 @@ def main():
         # 2
         col1, col2 = st.columns(2)
         with col1:
-            st.image("Atunima1.jpeg", width=200)
+            st.image(os.path.join("UgandaAppFinal","Atunima1.jpeg"), width=200)
         with col2:
             st.subheader("Atunima")
             st.info('Lead Data Engineer')
@@ -95,7 +100,7 @@ def main():
         # 3
         col1, col2 = st.columns(2)
         with col1:
-            st.image("David.jpeg", width=200)
+            st.image(os.path.join("UgandaAppFinal","David.jpeg"), width=200)
         with col2:
             st.subheader("David")
             st.info('Senior Data Analyst')
@@ -103,7 +108,7 @@ def main():
         # 4
         col1, col2 = st.columns(2)
         with col1:
-            st.image("Layo1.jpeg", width=200)
+            st.image(os.path.join("UgandaAppFinal","Layo1.jpeg"), width=200)
         with col2:
             st.subheader("Omolayo")
             st.info('Senior Data Scientist')
@@ -111,7 +116,7 @@ def main():
         # 5
         col1, col2 = st.columns(2)
         with col1:
-            st.image("Jack.jpg", width=200)
+            st.image(os.path.join("UgandaAppFinal","Jack.jpg"), width=200)
         with col2:
             st.subheader("Ikaneng Jack")
             st.info('Data Scientist')
@@ -127,7 +132,7 @@ def main():
         col1.markdown("<h1 style='color: #fcdc04;'>Solution Overview</h1>", unsafe_allow_html=True)
 
         # Place the image in the second column
-        col2.image("logo2.png", width=300)
+        col2.image(os.path.join("UgandaAppFinal","logo2.png"), width=300)
 
 
 
@@ -167,7 +172,7 @@ def main():
            and industrial settings
         ''')
         st.write("")
-        st.image("Image 2.jpeg", width= 800)
+        st.image(os.path.join("UgandaAppFinal","Image 2.jpeg"), width= 800)
         st.write("")
         #st.image("Image 1.jpeg", width= 800)
 				
@@ -186,9 +191,10 @@ def main():
         col1.markdown("<h1 style='color: #fcdc04;'>Predictor</h1>", unsafe_allow_html=True)
 
         # Place the image in the second column
-        col2.image("logo2.png", width=300)
+        col2.image(os.path.join("UgandaAppFinal","logo2.png"), width=300)
         # Load the dataset
-        data = pd.read_csv("df_train.csv")
+        data = pd.read_csv(os.path.join("UgandaAppFinal","df_train.csv"))
+
 
         selected_cols = ['Zonning', 'Employment_rate', 'Total_households', 'poverty_index', 'GDP_per_capita']
 
@@ -197,11 +203,8 @@ def main():
         y = data['tests_per_population']
 
         # Train the model
-        with warnings.catch_warnings():
-            warnings.simplefilter("ignore")
-            model = pickle.load(open('RF_model_imp_feats.sav', 'rb'))
-            model.fit(X, y)
-
+        model = pickle.load(open("UgandaAppFinal/RF_model_imp_feats.sav", 'rb'))
+        model.fit(X, y)
 
         # Create the Streamlit app
         def main():
@@ -241,9 +244,9 @@ def main():
         col1.markdown("<h1 style='color: #fcdc04;'>Uganda Map</h1>", unsafe_allow_html=True)
 
         # Place the image in the second column
-        col2.image("logo2.png", width=300)
+        col2.image(os.path.join("UgandaAppFinal","logo2.png"), width=300)
         #st.title("Uganda Map")
-        HtmlFile = open("my_map1.html", 'r', encoding='utf-8')
+        HtmlFile = open("UgandaAppFinal/my_map1.html", 'r', encoding='utf-8')
         source_code = HtmlFile.read() 
 
         # Set the desired height and width for the map
@@ -268,7 +271,7 @@ def main():
             col1.markdown("<h1 style='color: #fcdc04;'>Uganda Map</h1>", unsafe_allow_html=True)
 
             # Place the image in the second column
-            col2.image("logo2.png", width=300)
+            col2.image(os.path.join("UgandaAppFinal","logo2.png"), width=300)
             #st.image("Ab.jpg", width=450)
             st.header(" Get in touch with us 📩 ")
             contact_form = """
@@ -283,11 +286,12 @@ def main():
             st.markdown(contact_form, unsafe_allow_html=True)
 
             def local_css(file_name):
-                with open(file_name) as f:
+                with open("UgandaAppFinal/static/style.css") as f:
+
                     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
-            local_css("style/style.css")
-            st.image("Thank you.jpg", width=700)
+            local_css("static/style.css")
+            st.image("UgandaAppFinal/Thank you.jpg", width=700)
 
         selection = "Contact Us"
         options.get(selection, lambda: None)()
